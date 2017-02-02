@@ -9,8 +9,8 @@ public:
     SplitMedian();
     ~SplitMedian();
 
-    void add(int val) final;
-    double getMedian() final;
+    void add(int val) final override;
+    double getMedian() final override;
 
 private:
     const int _allocateStep = 64;

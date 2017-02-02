@@ -20,8 +20,7 @@ void BSTMedian::add(int val)
         _root = new Node(val, nullptr);
     } else {
         Node *curr = _root;
-        insertInternal( curr, val );
-        //updateMedian();
+        insertInternal( curr, val );        
     }
 }
 
@@ -46,23 +45,11 @@ BSTMedian::Node* BSTMedian::insertInternal(BSTMedian::Node *curr, int val)
         ++curr->subTreeSize;
         Node **children[] = { &curr->l, &curr->r };
         Node **child = val < curr->value ? children[0] : children[1];
-        (*child) = insertInternal( *child,val ); // TO_DO
+        (*child) = insertInternal( *child,val );
         (*child)->p = curr;
     }
 
     return curr;
-}
-
-void BSTMedian::updateMedian()
-{
-    int treeSize = getSizeIncluding( _root );
-    const int medianNum = ( treeSize + 1 ) / 2; //TO_DO add even processing
-    int leftSubSize = getSizeIncluding( _root->l );
-    if( medianNum < leftSubSize ) {
-        swapParentChild( _root, _root->l );
-    } else if( medianNum > ( leftSubSize + _root->size ) ) {
-        swapParentChild( _root, _root->r );
-    }
 }
 
 int BSTMedian::getSizeIncluding(BSTMedian::Node *curr)
@@ -102,50 +89,6 @@ double BSTMedian::findMedian()
         }
     }
     return div != 0.0 ? median / div : double();
-}
-
-void BSTMedian::swapParentChild(BSTMedian::Node *parent, BSTMedian::Node *child)
-{
-    assert( parent != nullptr && child != nullptr );
-    assert( parent->l == child || parent->r == child );
-    Node *rightParentChild = parent->r;
-    Node *parentParent = parent->p;
-    assignNodes( parent, child->l, child->r );
-    assignNodes( child, parent, rightParentChild );
-    if( parent == _root ) {
-        _root = child;
-    } else {
-        setChildren( parentParent, child, nullptr, false );
-    }
-}
-
-void BSTMedian::assignNodes(BSTMedian::Node *parent, BSTMedian::Node *lChild, BSTMedian::Node *rChild)
-{
-    setParent( lChild, rChild, parent );
-    setChildren( parent, lChild, rChild );
-}
-
-void BSTMedian::setChildren(BSTMedian::Node *parent, BSTMedian::Node *lChild, BSTMedian::Node *rChild, bool writeNull)
-{
-    assert( parent != nullptr );
-    Node *oldChildren[] = { parent->l, parent->r };
-    Node *newChildren[] = { lChild, rChild };
-    for( int i = 0; i < 2; ++i ) {
-        if( newChildren[i] != nullptr || writeNull ) {
-            oldChildren[i] = newChildren[i];
-        }
-    }
-}
-
-void BSTMedian::setParent(BSTMedian::Node *lChild, BSTMedian::Node *rChild, BSTMedian::Node *parent)
-{
-    assert( parent != nullptr );
-    Node *children[] = { lChild, rChild };
-    for( int i = 0; i < 2; ++i ) {
-        if( children[i] != nullptr ) {
-            children[i]->p = parent;
-        }
-    }
 }
 
 BSTMedian::Node::~Node() {

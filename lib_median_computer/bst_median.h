@@ -9,8 +9,8 @@ public:
     BSTMedian();
     ~BSTMedian();
 
-    void add(int val) final;
-    double getMedian() final;
+    void add(int val) final override;
+    double getMedian() final override;
 private:
     struct Node {
         Node( int v, Node *par ) :
@@ -29,12 +29,6 @@ private:
     Node *insertInternal(Node *curr, int val);
         int getSizeIncluding( Node *curr );
     double findMedian();
-    //unused now
-    void updateMedian();
-        void swapParentChild( Node *parent, Node *child );
-            void assignNodes( Node *parent, Node *lChild, Node *rChild );
-                void setChildren( Node *parent, Node *lChild, Node *rChild, bool writeNull = true );
-                void setParent( Node *lChild, Node *rChild, Node *parent );
 };
 
 #endif // BSTMEDIAN_H

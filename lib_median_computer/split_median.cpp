@@ -25,7 +25,6 @@ void SplitMedian::add(int val)
     ++_size;
 }
 
-//http://www.alcula.com/calculators/statistics/median/
 double SplitMedian::getMedian()
 {
     if( _data == nullptr || _size == 0 ) {
@@ -63,7 +62,7 @@ int* SplitMedian::findStatistic(int *beg, int *end, int medianIdx)
 
 int* SplitMedian::partitionAndFindElement(int *beg, int *end)
 {
-    int mid = distance( end, beg ) / 2; //TO_DO randomize?
+    int mid = distance( end, beg ) / 2;
     swap( beg+mid, end );
     return partition(beg, end);
 }
