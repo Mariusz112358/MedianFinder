@@ -149,9 +149,6 @@ void BSTMedian::setParent(BSTMedian::Node *lChild, BSTMedian::Node *rChild, BSTM
 }
 
 BSTMedian::Node::~Node() {
-//    static int deleteNum = 0;
-//    deleteNum += this->size;
-//    std::cout << deleteNum << ", ";
     if( l != nullptr ) {
         delete l;
         l = nullptr;
