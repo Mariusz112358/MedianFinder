@@ -3,8 +3,8 @@ Project contains two implementations of median finding from data stream (element
 First one is based on quicksort partition of data in array.
 Second one is based on binary search trees.
 
-* Median of odd number of elements is computed as: x_n[( n + 1 ) / 2] 
-* Median of even number of elments is computed as: ( x_n[n/2] + x_n[(n+2)/2] ) / 2
+* Median of odd number of sorted elements is computed as: x_n[( n + 1 ) / 2] 
+* Median of even number of sorted elements is computed as: ( x_n[n/2] + x_n[(n+2)/2] ) / 2
 
 #TESTING
 ### rand_tests 
