@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-add_definitions(-std=c++14)
+add_definitions(-std=c++11)
 
 project(rand_tests)
 aux_source_directory(. SRC_LIST)
