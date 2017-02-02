@@ -3,17 +3,18 @@ Project contains two implementations of median finding from data stream (element
 First one is based on quicksort partition of data in array.
 Second one is based on binary search trees.
 
-Median of odd number of elements is computed as: x_n[( n + 1 ) / 2]
-Median of even number of elments is computed as: ( x_n[n/2] + x_n[(n+2)/2] ) / 2
+* Median of odd number of elements is computed as: x_n[( n + 1 ) / 2] 
+* Median of even number of elments is computed as: ( x_n[n/2] + x_n[(n+2)/2] ) / 2
 
 #TESTING
-rand_tests 
+### rand_tests 
 Tests generates artificial data from uniform distribution and forwards it to three algorithms: split, bst and implementation based on stl nth_element. All three results are printed and any differences between those three are signaled on output.
 
-file_tests 
+### file_tests 
 Tests can be defined by user based on input from console or file provided as program input.
 
 #Sample usage as library for BST median finder
+```
 IMedianComputer *p = new BSTMedian();
 std::vector<int> data = { 6, 5, 4, 3, 8, 2, 4 };
 for( const auto &d : data ) {
@@ -22,4 +23,5 @@ for( const auto &d : data ) {
 }
 std::cout << std::endl;
 delete p;
+```
 
