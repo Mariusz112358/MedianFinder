@@ -2,6 +2,7 @@
 #include "imedian_computer.h"
 #include "bst_median.h"
 #include "split_median.h"
+#include "heap_median/heap_median.h"
 
 //For testing purposes
 #include <algorithm>
@@ -40,8 +41,8 @@ almost_equal(T x, T y, int ulp)
 }
 
 void process( std::vector<int> &data, bool supressOut = false ) {
-    const int myAlgNum = 2;
-    IMedianComputer *medianAlgs[myAlgNum] = { new SplitMedian, new BSTMedian };
+    const int myAlgNum = 3;
+    IMedianComputer *medianAlgs[myAlgNum] = { new SplitMedian(), new BSTMedian(), new HeapMedian() };
     testVec.clear();
 
     if( !supressOut ) {
@@ -53,13 +54,14 @@ void process( std::vector<int> &data, bool supressOut = false ) {
         std::cout << std::endl;
     }
 
-    const int allAlgNum = 3;
-    const char *algNames[allAlgNum] = { "STL",
-                                "SPLIT",
-                                "BST" };
+    const int allAlgNum = 4;
+    const char *algNames[allAlgNum] = { "STL", "SPLIT", "BST", "HEAP" };
 
     if( !supressOut ) {
-        std::cout << " | " << algNames[0] << "| "<< algNames[1] << "| " << algNames[2] << " |" << std::endl;
+        for( int i = 0; i < allAlgNum; ++i ) {
+            std::cout << " | " << algNames[i];
+        }
+        std::cout << std::endl;
     }
 
     std::vector<double> time( allAlgNum, 0.0 );
@@ -111,14 +113,13 @@ void process( std::vector<int> &data, bool supressOut = false ) {
         }
     }
 
-    if( !supressOut ) {
-        std::cout << std::endl;
-        for( int i = 0; i < allAlgNum; ++ i ) {
-            std::cout << "Working time for processing data one by one is: " << algNames[i] << " "
-                      << time[i] << " microseconds." << std::endl;
-        }
-        std::cout << std::endl;
+    std::cout << std::endl;
+    for( int i = 0; i < allAlgNum; ++ i ) {
+        std::cout << "Working time for processing data one by one is: " << algNames[i] << " "
+                  << time[i] << " microseconds." << std::endl;
     }
+    std::cout << std::endl;
+
 
     for( int i = 0; i < myAlgNum; ++i ) {
         delete medianAlgs[i];
@@ -178,7 +179,7 @@ int main(int argc, char *argv[])
             }
         } else { //Start processing
             auto randData = generateData( params[0], params[1], params[2] );
-            process( randData );
+            process( randData, true );
             reading = 0;
             std::cout << "FINISHED!" << std::endl;
         }

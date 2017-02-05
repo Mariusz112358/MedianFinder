@@ -4,10 +4,12 @@
 #include "imedian_computer.h"
 #include "bst_median.h"
 #include "split_median.h"
+#include "heap_median/heap_median.h"
 
 int main(int argc, char *argv[])
 {    
-    IMedianComputer *algs[] = { new BSTMedian(), new SplitMedian };
+    IMedianComputer *algs[] = { new BSTMedian(), new SplitMedian(), new HeapMedian() };
+    const char *algNames[] = { "BST", "Split", "Heap" };
     int size = sizeof( algs ) / sizeof( IMedianComputer *);
     if( argc == 1 ) {
         std::cout << "No arguments provided. Waiting for input... To exit pass: e" << std::endl;
@@ -18,10 +20,11 @@ int main(int argc, char *argv[])
             int val = 0;
             try {
                 val = std::stoi( text );
-                algs[0]->add( val );
-                algs[1]->add( val );
-                std::cout << "BST median: " << algs[0]->getMedian() << std::endl;
-                std::cout << "Split median: " << algs[1]->getMedian() << std::endl;
+                for( int i = 0; i < size; ++i ) {
+                    algs[i]->add( val );
+                    std::cout << algNames[i] <<" " << algs[i]->getMedian() << ", ";
+                }
+                std::cout << std::endl;
             } catch ( std::exception &e ) {
                 std::cout << "Non-numeric value provided! " << std::endl;
             }
@@ -49,10 +52,11 @@ int main(int argc, char *argv[])
                         }
                     }
                     val = std::stoi( line );
-                    algs[0]->add( val );
-                    algs[1]->add( val );
-                    std::cout << "BST: " << algs[0]->getMedian() << ", ";
-                    std::cout << "Split: " << algs[1]->getMedian() << std::endl;
+                    for( int i = 0; i < size; ++i ) {
+                        algs[i]->add( val );
+                        std::cout << algNames[i] <<" " << algs[i]->getMedian() << ", ";
+                    }
+                    std::cout << std::endl;
                 } catch( std::exception &e ) {
                     std::cout << "Non-numeric value provided in FIRST file: " << line << std::endl;
                 }
