@@ -1,9 +1,9 @@
 # MedianFinder
-Project contains four implementations of median finding from integer data stream (elements are coming one by one).
-First one is based on quicksort partition of data in array. Inserting single element is O(1), finding median O(n).
-Second one is based on binary search trees. Inserting O(log n), finding median O(log n), but pessimistic for both is O(n) as tree may be not balanced.
-Third is based on two heaps: min and max. Inserting O(log n), finding median O(log n). The fastest solution in tests. 
-Fourth is using red-black trees for self balancing of tree. Inserting O(log n), finding median O(log n).
+Project contains four implementations of median finding from integer data stream (elements are coming one by one).  
+First one is based on quicksort partition of data in array. Inserting single element is O(1), finding median O(n).  
+Second one is based on binary search trees. Inserting O(log n), finding median O(log n), but pessimistic for both is O(n) as tree may be not balanced.  
+Third is based on two heaps: min and max. Inserting O(log n), finding median O(log n), which is the fastest solution in tests.   
+Fourth is using red-black trees for tree self balancing. Inserting O(log n), finding median O(log n).  
 
 * Median of odd number of sorted elements is computed as: x_n[( n + 1 ) / 2] 
 * Median of even number of sorted elements is computed as: ( x_n[n/2] + x_n[(n+2)/2] ) / 2
