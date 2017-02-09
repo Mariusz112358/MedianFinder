@@ -19,8 +19,8 @@ void BSTMedian::add(int val)
     if( _root == nullptr ) {
         _root = new Node(val, nullptr);
     } else {
-        Node *curr = _root;
-        insertInternal( curr, val );        
+        Node *inserted = nullptr;
+        insertInternal( _root, new Node( val, nullptr), &inserted );
     }
 }
 
@@ -33,19 +33,22 @@ double BSTMedian::getMedian()
     }
 }
 
-BSTMedian::Node* BSTMedian::insertInternal(BSTMedian::Node *curr, int val)
+BSTMedian::Node* BSTMedian::insertInternal(BSTMedian::Node *curr, Node *newNode, Node **insertedNode)
 {
     if( curr == nullptr ) {
-        return new Node( val, curr );
+        *insertedNode = newNode;
+        return *insertedNode;
     }
 
-    if( curr->value == val ) {
+    if( curr->value == newNode->value ) {
         ++curr->size;
+        insertedNode = nullptr;
+        delete newNode;
     } else {
         ++curr->subTreeSize;
         Node **children[] = { &curr->l, &curr->r };
-        Node **child = val < curr->value ? children[0] : children[1];
-        (*child) = insertInternal( *child,val );
+        Node **child = newNode->value < curr->value ? children[0] : children[1];
+        (*child) = insertInternal( *child, newNode, insertedNode );
         (*child)->p = curr;
     }
 

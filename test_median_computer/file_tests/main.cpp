@@ -2,14 +2,15 @@
 #include <fstream>
 #include <string>
 #include "imedian_computer.h"
-#include "bst_median.h"
+#include "tree_median/bst_median.h"
+#include "tree_median/rbt_median.h"
 #include "split_median.h"
 #include "heap_median/heap_median.h"
 
 int main(int argc, char *argv[])
 {    
-    IMedianComputer *algs[] = { new BSTMedian(), new SplitMedian(), new HeapMedian() };
-    const char *algNames[] = { "BST", "Split", "Heap" };
+    IMedianComputer *algs[] = { new BSTMedian(), new SplitMedian(), new HeapMedian(), new RBTMedian() };
+    const char *algNames[] = { "BST", "Split", "Heap", "RBT" };
     int size = sizeof( algs ) / sizeof( IMedianComputer *);
     if( argc == 1 ) {
         std::cout << "No arguments provided. Waiting for input... To exit pass: e" << std::endl;

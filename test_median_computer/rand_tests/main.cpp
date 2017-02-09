@@ -1,6 +1,7 @@
 #include <iostream>
 #include "imedian_computer.h"
-#include "bst_median.h"
+#include "tree_median/bst_median.h"
+#include "tree_median/rbt_median.h"
 #include "split_median.h"
 #include "heap_median/heap_median.h"
 
@@ -41,8 +42,8 @@ almost_equal(T x, T y, int ulp)
 }
 
 void process( std::vector<int> &data, bool supressOut = false ) {
-    const int myAlgNum = 3;
-    IMedianComputer *medianAlgs[myAlgNum] = { new SplitMedian(), new BSTMedian(), new HeapMedian() };
+    const int myAlgNum = 4;
+    IMedianComputer *medianAlgs[myAlgNum] = { new SplitMedian(), new BSTMedian(), new HeapMedian(), new RBTMedian() };
     testVec.clear();
 
     if( !supressOut ) {
@@ -54,8 +55,8 @@ void process( std::vector<int> &data, bool supressOut = false ) {
         std::cout << std::endl;
     }
 
-    const int allAlgNum = 4;
-    const char *algNames[allAlgNum] = { "STL", "SPLIT", "BST", "HEAP" };
+    const int allAlgNum = myAlgNum + 1;
+    const char *algNames[allAlgNum] = { "STL", "SPLIT", "BST", "HEAP", "RBT" };
 
     if( !supressOut ) {
         for( int i = 0; i < allAlgNum; ++i ) {
@@ -119,7 +120,6 @@ void process( std::vector<int> &data, bool supressOut = false ) {
                   << time[i] << " microseconds." << std::endl;
     }
     std::cout << std::endl;
-
 
     for( int i = 0; i < myAlgNum; ++i ) {
         delete medianAlgs[i];
